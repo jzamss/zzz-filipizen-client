@@ -1,6 +1,6 @@
 import React from "react";
 import "./LguHeader.css";
-import { AppBar } from "rsi-react-components";
+import { AppBar } from "zzz-react-components";
 
 const LguHeader = ({ partner }) => {
   return (

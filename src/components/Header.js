@@ -1,6 +1,6 @@
 import React from "react";
 import "./Header.css";
-import FilipizenIcon from "../icons/FilipizenIcon";
+import FilipizenIcon from "../assets/icons/FilipizenIcon";
 
 const Header = ({ style }) => {
   return (

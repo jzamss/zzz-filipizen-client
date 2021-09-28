@@ -1,6 +1,6 @@
 import React from "react";
 import "./Footer.css";
-import FilipizenIcon from "../icons/FilipizenIcon";
+import FilipizenIcon from "../assets/icons/FilipizenIcon";
 
 const communityLinks = [
   { title: "Facebook", href: "www.facebook.com" },
@@ -25,7 +25,7 @@ const supportLinks = [
   { title: "Terms of Service", href: "" },
 ];
 
-const Footer = (props) => {
+const Footer = () => {
   return (
     <footer className="Footer">
       <hr className="Footer__divider" />
@@ -34,7 +34,7 @@ const Footer = (props) => {
           <div>
             <FilipizenIcon />
           </div>
-          <p className="copyright">Copyright © 2020 filipizen</p>
+          <p className="copyright">Copyright © 2021 filipizen</p>
         </div>
       </div>
       <div className="Footer__information">

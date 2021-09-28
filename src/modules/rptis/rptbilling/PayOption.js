@@ -4,7 +4,7 @@ import {
   Combobox,
   integerRangeToArray,
   getCurrentYear,
-} from "rsi-react-components";
+} from "zzz-react-components";
 
 const PayOption = ({ initialData, onAccept, open, onCancel }) => {
   const [cy] = useState(getCurrentYear());

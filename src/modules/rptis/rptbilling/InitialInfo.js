@@ -12,93 +12,104 @@ import {
   Integer,
   Panel,
   Card,
-  Submit,
-  useDataContext
-} from "rsi-react-components";
+  SubmitButton,
+  useEntity,
+} from "zzz-react-components";
 
-const InitialInfo = ({ title, partner, moveNextStep, movePrevStep, onCancel }) => {
-  const [ctx, updateCtx] = useDataContext();
+const InitialInfo = ({ title, partner, moveNextStep, onCancel }) => {
+  const [entity, setEntity] = useEntity();
   const [mode, setMode] = useState("initial");
   const [error, setError] = useState();
 
   const currentYear = new Date().getFullYear();
 
-  const getBilling = async (data, billOptions = {}) => {
-    const svc = await Service.lookupAsync(`${partner.id}:OnlineLandTaxBillingService`, "rpt");
-    const params = { txntype: data.txntype, refno: data.refno, ...billOptions };
+  const loadBill = (entity, form, callback) => {
     if (mode === "initial-advance") {
-      params.billtoyear = data.billtoyear;
-    }
-    return await svc.invoke("getBilling", params);
-  };
-
-  const loadBill = (data) => {
-    if (mode === "initial-advance") {
-      if (data.billtoyear <= currentYear) {
+      if (entity.billtoyear <= currentYear) {
         setError("Advance year to pay should be greater than " + currentYear);
         return;
       }
     }
 
-    getBilling(data)
-      .then((bill) => {
-        data.bill = bill.info;
-        data.bill.barcode = data.bill.billno;
-        updateCtx(data);
-        moveNextStep();
-      })
-      .catch((err) => {
+    const params = { txntype: entity.txntype, refno: entity.refno }
+    if (mode === "initial-advance") {
+      params.billtoyear = entity.billtoyear;
+    }
+    const svc = Service.lookup(`${partner.id}:OnlineLandTaxBillingService`, "rpt")
+    svc.invoke("getBilling", params, (err, bill) => {
+      if (err) {
+        let errorMsg = err.toString();
         if (/unpaid|full/gi.test(err)) {
           setMode("initial-advance");
-        } else {
-          setError(err.toString());
+          errorMsg = `Ledger is fully paid for the year ${params.billtoyear ? params.billtoyear : currentYear}`;
         }
-      });
-  };
+        callback(errorMsg);
+        setError(errorMsg);
+      } else {
+        setEntity(draft => {
+          draft.refno = entity.refno;
+          draft.bill = bill.info;
+          draft.bill.barcode = draft.bill.billno;
+          return draft;
+        });
+        moveNextStep();
+        callback();
+      }
+    });
+  }
+
+  
 
   return (
-    <Form initialData={ctx} onSubmit={loadBill}>
-      <Card>
-        <Panel style={{minWidth: 400}}>
-
-          <Title>{title}</Title>
-          <Subtitle>Initial Information</Subtitle>
-          <Spacer />
-          <Error msg={error} />
-          <Panel visibleWhen={mode === "initial"}>
-            <Text
-              caption="Tax Declaration No."
-              name="refno"
-              autoFocus={true}
-              required={true}
-            />
-          </Panel>
-
-          <Panel visibleWhen={mode === "initial-advance"}>
-            <p>
-              The associated ledger is fully paid for the current year.
-              <br />
-              To pay in advance, specify the year and click Next button.
-            </p>
+    <Form
+      initialEntity={entity}
+      onSubmit={loadBill}
+      render={() => (
+        <Card>
+          <Panel style={{ minWidth: 400 }}>
+            <Title>{title}</Title>
+            <Subtitle>Initial Information</Subtitle>
             <Spacer />
-            <Panel>
-              <Text caption="Tax Declaration No." name="refno" disabled={true} />
-              <Integer
-                caption="Advance Year to Pay"
-                name="billtoyear"
-                thousandSeparator={false}
+            <Error msg={error} />
+            <Panel visibleWhen={mode === "initial"}>
+              <Text
+                caption="Tax Declaration No."
+                name="refno"
                 autoFocus={true}
                 required={true}
               />
             </Panel>
+
+            <Panel visibleWhen={mode === "initial-advance"}>
+              <p>
+                The associated ledger is fully paid for the current year.
+                <br />
+                To pay in advance, specify the year and click Next button.
+              </p>
+              <Spacer />
+              <Panel>
+                <Text
+                  caption="Tax Declaration No."
+                  name="refno"
+                  disabled={true}
+                />
+                <Integer
+                  caption="Advance Year to Pay"
+                  name="billtoyear"
+                  thousandSeparator={false}
+                  autoFocus={true}
+                  required={true}
+                />
+              </Panel>
+            </Panel>
           </Panel>
-        </Panel>
-        <ActionBar>
-          <BackLink caption="Back" variant="text" action={onCancel} />
-          <Submit caption="Next" />
-        </ActionBar>
-      </Card>
-    </Form>
+          <ActionBar>
+            <BackLink caption="Back" variant="text" action={onCancel} />
+            <SubmitButton caption="Next" />
+          </ActionBar>
+        </Card>
+      )}
+    />
   );
 };
 

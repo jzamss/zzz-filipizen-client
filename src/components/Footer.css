@@ -1,7 +1,8 @@
 /* .footer-container */
 .Footer {
-  margin-bottom: -150px;
+  /* margin-bottom: -150px; */
   background-color: #ecf0f1;
+  /* position: relative; */
 }
 
 /* .divider-root */
@@ -115,14 +116,14 @@
   }
 
   /* .footer-container */
-  .Footer {
+  /* .Footer {
     margin-bottom: -270px;
-  }
+  } */
 }
 
 @media only screen and (min-device-width: 314px) and (max-device-width: 736px) and (-webkit-min-device-pixel-ratio: 3) {
   /* .footer-container */
-  .Footer {
+  /* .Footer {
     margin-bottom: -270px;
-  }
+  } */
 }
