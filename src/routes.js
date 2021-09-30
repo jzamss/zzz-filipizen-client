@@ -5,8 +5,8 @@ import PartnerServiceScreen from "./screens/PartnerServiceScreen";
 // import ModuleScreen from "./screens/ModuleScreen";
 // import ServiceScreen from "./screens/ServiceScreen";
 
-import PaymentSuccess from "./screens/PaymentSuccess";
-import PaymentError from "./screens/PaymentError";
+import PaymentSuccessScreen from "./screens/PaymentSuccessScreen";
+import PaymentErrorScreen from "./screens/PaymentErrorScreen";
 import NotFoundScreen from "./screens/NotFoundScreen";
 
 const routes = [
@@ -34,12 +34,12 @@ const routes = [
   {
     name: "success",
     path: "/payment/success",
-    component: PaymentSuccess,
+    component: PaymentSuccessScreen,
   },
   {
     name: "error",
     path: "/payment/error",
-    component: PaymentError,
+    component: PaymentErrorScreen,
   },
   {
     name: "404",
