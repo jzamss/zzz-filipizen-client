@@ -2,17 +2,19 @@ import loadable from "@loadable/component";
 
 import rptis from "./rptis/module.json";
 import bpls from "./bpls/module.json";
+import waterworks from "./waterworks/module.json";
 
 /*======================================
 * REGISTERED MODULES
 =======================================*/
-const modules = [bpls, rptis];
+const modules = [bpls, rptis, waterworks];
 
 /* Return the filtered modules for the given partner */
 export const getModules = (partner) => {
   const pattern = partner.includeservices;
   if (!pattern) return [];
 
+  console.log("partner.excludeservices", partner.excludeservices)
   const regex = new RegExp(`(${pattern})`, "i");
   const excludeRegex = partner.excludeservices
     ? new RegExp(`(${partner.excludeservices})`, "i")

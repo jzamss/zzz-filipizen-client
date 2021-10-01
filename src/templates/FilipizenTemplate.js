@@ -1,7 +1,7 @@
 import React from "react";
 import "./FilipizenTemplate.css";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 import { LinearProgress } from "zzz-react-components";
 
 const FilipizenTemplate = ({ children, loading = false }) => {

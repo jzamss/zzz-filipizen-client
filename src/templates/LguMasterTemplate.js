@@ -1,7 +1,7 @@
 import React from "react";
 import "./LguMasterTemplate.css";
 import LguHeader from "./LguHeader";
-import Footer from "../components/Footer";
+import Footer from "./components/Footer";
 
 const LguMasterTemplate = ({ children, partner = {} }) => {
   return (

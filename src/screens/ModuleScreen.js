@@ -1,6 +1,5 @@
 import React from "react";
 import { Title, Link } from "zzz-react-components";
-import { usePartnerFromLocation } from "zzz-filipizen-components";
 import LguMasterTemplate from "../templates/LguMasterTemplate";
 import "./ModuleScreen.css";
 

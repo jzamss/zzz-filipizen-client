@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Title, Subtitle, Link } from "zzz-react-components";
 import LguMasterTemplate from "../templates/LguMasterTemplate";
-import UnderMaintenance from "../components/UnderMaintenance";
+import UnderMaintenanceScreen from "./UnderMaintenanceScreen";
 import { usePartner } from "../hooks";
 import { getModules } from "../modules";
 import "./PartnerScreen.css";
@@ -47,7 +47,7 @@ const PartnerScreen = ({ location, history }) => {
 
   const onSelectService = (module, service) => {
     history.push({
-      pathname: `/partner/${partner.group.name}_${partner.name}/${module.name}/${service.name}`,
+      pathname: `/partners/${partner.group.name}_${partner.name}/services/${module.name}/${service.name}`,
       state: { partner, module, service },
     });
   };
@@ -62,7 +62,7 @@ const PartnerScreen = ({ location, history }) => {
           <ServiceList modules={modules} onSelect={onSelectService} />
         </div>
       ) : (
-        <UnderMaintenance containerStyle={{ marginTop: 40 }} />
+        <UnderMaintenanceScreen containerStyle={{ marginTop: 40 }} />
       )}
     </LguMasterTemplate>
   );

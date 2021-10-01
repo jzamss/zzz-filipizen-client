@@ -5,15 +5,10 @@
   "services": [
     {
       "module": "rptis",
-      "name": "rptbilling",
+      "name": "billing",
       "title": "Realty Tax Online Billing",
-      "component": "RptBillingController"
-    },
-    {
-      "module": "rptis",
-      "name": "rpttaxclearance",
-      "title": "Online Realty Tax Clearance",
-      "component": "TaxClearanceController"
+      "component": "RptBillingController",
+      "permission": "rptis.billing"
     }
   ]
 }

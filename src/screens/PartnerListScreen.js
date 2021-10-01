@@ -78,7 +78,7 @@ const PartnerLgu = ({ partners }) => {
             style={partner.isonline !== "0" ? {} : { color: "#aaa" }}
             component={RouterLink}
             to={{
-              pathname: `/partner/${partnerGroup.objid}_${partner.name}/services`,
+              pathname: `/partners/${partnerGroup.objid}_${partner.name}/services`,
               state: { partner },
             }}
             caption={`${partner.title} (${partner.id})`}

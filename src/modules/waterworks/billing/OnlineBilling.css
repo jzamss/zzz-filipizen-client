@@ -1,0 +1,15 @@
+
+.totalContainer {
+    display: flex;
+    justify-content: "flex-end";
+    margin-top: -10;
+}
+
+.total {
+    font-weight: 800;
+    margin-right: 40;
+}
+
+.amount {
+    margin-right: 20;
+}

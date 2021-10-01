@@ -1,0 +1,14 @@
+{
+  "name": "waterworks",
+  "module": "filipizen-waterworks",
+  "title": "Waterworks",
+  "services": [
+    {
+      "module": "waterworks",
+      "name": "billing",
+      "title": "Waterworks Billing",
+      "component": "WaterworksBillingController",
+      "permission": "waterworks.billing"
+    }
+  ]
+}

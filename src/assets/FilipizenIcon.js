@@ -1,5 +1,5 @@
 import React from "react";
-import FilipizenLogo from "../filipizen.svg";
+import FilipizenLogo from "./filipizen.svg";
 
 const FilipizenIcon = () => {
   return <img src={FilipizenLogo} alt="filipizen" />;

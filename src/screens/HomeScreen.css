@@ -1,19 +1,54 @@
 .HomeScreen {
-  margin-top: 40px;
-  width: 100%;
+  flex-direction: row;
+  width: 50%;
+  margin: auto;
   height: 100vh;
 }
-
-.HomeScreen__modules {
+.HomeScreen,
+.HomeScreen__panel {
   display: flex;
-  flex-wrap: wrap;
-  margin-top: 20px;
+  justify-content: center;
+  align-items: flex-start;
 }
-
-.HomeScreen__module {
-  width: 150px;
-  margin: 10px;
-  padding: 5px;
-  border: 1px solid green;
+.HomeScreen__panel {
+  flex-direction: column;
+  margin-top: 60px;
+}
+.HomeScreen__image {
+  width: 200px;
+}
+.HomeScreen__infoContainer {
+  align-items: center;
+}
+.HomeScreen__infoContainer,
+.HomeScreen__information {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.HomeScreen__information {
+  align-items: flex-start;
+  margin: 40px 0;
+}
+.HomeScreen__title {
+  font-size: 2.7rem;
+  font-weight: 900;
+}
+.HomeScreen__description {
+  font-size: 1.2rem;
+  font-weight: 400;
+  margin-top: 10px;
+}
+.HomeScreen__button {
+  border-radius: 3px;
+  border: none;
+  padding: 12px 50px;
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: #fff;
+  background-color: #3f51b5;
+}
+.HomeScreen__button:hover {
   cursor: pointer;
+  background-color: #33408a;
 }
