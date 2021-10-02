@@ -14,7 +14,7 @@ import {
   Title,
   Decimal,
   BackLink,
-  useEntity
+  useEntity,
 } from 'zzz-react-components'
 
 import PayOption from '../../components/PayOption'
@@ -30,19 +30,16 @@ const OnlineBilling = ({
   const [error, setError] = useState();
   const [showPayOption, setShowPayOption] = useState(false);
 
-  const getBilling = async (billOptions = {}) => {
-    const svc = await Service.lookupAsync(`${partner.id}:OnlineLandTaxBillingService`, "rpt")
-    const params = { txntype: entity.txntype, refno: entity.refno, ...billOptions }
-    return await svc.invoke("getBilling", params);
-  }
-
   const loadBill = (billOptions = {}) => {
-    setError(null);
-    getBilling(billOptions).then(bill => {
-      setEntity(draft => {draft.bill = bill.info});
-    }).catch(err => {
-      setError(err.toString());
-    })
+    const svc = Service.lookup(`${partner.id}:OnlineLandTaxBillingService`, "rpt")
+    const params = { txntype: entity.txntype, refno: entity.refno, ...billOptions }
+    svc.invoke("getBilling", params, (err, bill) => {
+      if (err) {
+        setError(err.toString());
+      } else {
+        setEntity(draft => {draft.bill = bill.info});
+      }
+    });
   }
 
   const payOptionHandler = (billOption) => {

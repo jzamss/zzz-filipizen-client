@@ -24,8 +24,8 @@ export const getModules = (partner) => {
   partnerModules.forEach((module) => {
     const partnerServices = module.services.filter(
       (service) =>
-        regex.test(service.name) &&
-        (!excludeRegex || !excludeRegex.test(service.name))
+        regex.test(service.permission) &&
+        (!excludeRegex || !excludeRegex.test(service.permission))
     );
     module.services = partnerServices;
   });
@@ -45,7 +45,7 @@ export const getService = ({ partner, location }) => {
 
   //extract service from location
   const pathname = location.pathname;
-  const matches = pathname.match("/partner/(.*)/(.*)/(.*)");
+  const matches = pathname.match("/partners/(.*)/(.*)/(.*)");
   if (!matches || matches.length < 4) {
     return false;
   }

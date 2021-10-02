@@ -14,20 +14,19 @@ import {
   Card,
   SubmitButton,
   useEntity,
+  FORM_ERROR
 } from "zzz-react-components";
 
 const InitialInfo = ({ title, partner, moveNextStep, onCancel }) => {
   const [entity, setEntity] = useEntity();
   const [mode, setMode] = useState("initial");
-  const [error, setError] = useState();
 
   const currentYear = new Date().getFullYear();
 
   const loadBill = (entity, form, callback) => {
     if (mode === "initial-advance") {
       if (entity.billtoyear <= currentYear) {
-        setError("Advance year to pay should be greater than " + currentYear);
-        return;
+        return callback({[FORM_ERROR]: `Advance year to pay should be greater than ${currentYear}`});
       }
     }
 
@@ -43,8 +42,7 @@ const InitialInfo = ({ title, partner, moveNextStep, onCancel }) => {
           setMode("initial-advance");
           errorMsg = `Ledger is fully paid for the year ${params.billtoyear ? params.billtoyear : currentYear}`;
         }
-        callback(errorMsg);
-        setError(errorMsg);
+        return callback(errorMsg);
       } else {
         setEntity(draft => {
           draft.refno = entity.refno;
@@ -64,13 +62,13 @@ const InitialInfo = ({ title, partner, moveNextStep, onCancel }) => {
     <Form
       initialEntity={entity}
       onSubmit={loadBill}
-      render={() => (
+      render={({submitFailed, submitErrors}) => (
         <Card>
           <Panel style={{ minWidth: 400 }}>
             <Title>{title}</Title>
             <Subtitle>Initial Information</Subtitle>
             <Spacer />
-            <Error msg={error} />
+            {submitFailed && <Error msg={submitErrors} />}
             <Panel visibleWhen={mode === "initial"}>
               <Text
                 caption="Tax Declaration No."

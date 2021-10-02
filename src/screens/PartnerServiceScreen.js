@@ -10,7 +10,7 @@ const PartnerServiceScreen = (props) => {
   const history = useHistory();
   const [partner, setPartner, isPartnerError] = usePartner(location);
   const [service, setService] = useState();
-  const [user, setUser] = useState({ name: "juan" });
+  const [user, setUser] = useState();
 
   useEffect(() => {
     if (!partner) return;

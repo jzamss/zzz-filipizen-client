@@ -4,7 +4,10 @@ import { Service } from "zzz-react-components";
 export const getPartnerFromLocation = (location) => {
   return new Promise((resolve, reject) => {
     const pathname = location.pathname;
-    const matches = pathname.match("/partner/(.*)_(.*)/services");
+    const tokens = pathname.split("/");
+    if (tokens.length < 3) return reject("Invalid path");
+    
+    const matches = tokens[2].match("(.*)_(.*)");
     if (!matches || matches.length < 3) {
       reject("Invalid path");
     }

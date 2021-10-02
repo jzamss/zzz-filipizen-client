@@ -23,14 +23,14 @@ const routes = [
     component: PartnerListScreen,
   },
   {
-    name: "services",
-    path: "/partners/:partnerId/services",
+    name: "partner",
+    path: "/partners/:partnerId",
     exact: true,
     component: PartnerScreen,
   },
   {
     name: "service",
-    path: "/partners/:partnerId/services/:module/:service",
+    path: "/partners/:partnerId/:module/:service",
     component: PartnerServiceScreen,
   },
   {

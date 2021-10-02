@@ -1,15 +1,13 @@
 
-.totalContainer {
+.OnlineBilling_totalContainer {
     display: flex;
-    justify-content: "flex-end";
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
     margin-top: -10;
 }
 
-.total {
+.OnlineBilling_total {
     font-weight: 800;
-    margin-right: 40;
-}
-
-.amount {
-    margin-right: 20;
+    flex-basis: 80px;
 }

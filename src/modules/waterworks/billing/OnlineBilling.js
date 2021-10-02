@@ -78,9 +78,9 @@ const OnlineBilling = ({
                 align="right"
               />
             </Table>
-            <Panel className="totalContainer">
-              <h4 className="total">TOTAL</h4>
-              <h4 className="amount">{currencyFormat(bill.amount)}</h4>
+            <Panel className="OnlineBilling_totalContainer" row>
+              <h4 className="OnlineBilling_total">TOTAL:</h4>
+              <h4>{currencyFormat(bill.amount)}</h4>
             </Panel>
           </Panel>
           <ActionBar>

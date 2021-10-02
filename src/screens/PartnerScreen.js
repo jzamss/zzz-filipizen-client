@@ -47,7 +47,7 @@ const PartnerScreen = ({ location, history }) => {
 
   const onSelectService = (module, service) => {
     history.push({
-      pathname: `/partners/${partner.group.name}_${partner.name}/services/${module.name}/${service.name}`,
+      pathname: `/partners/${partner.group.name}_${partner.name}/${module.name}/${service.name}`,
       state: { partner, module, service },
     });
   };

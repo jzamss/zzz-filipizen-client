@@ -10,7 +10,7 @@ const LguHeader = ({ partner }) => {
         {partner.id && (
           <Link
             to={{
-              pathname: `/partners/${partner.group.name}_${partner.name}/services`,
+              pathname: `/partners/${partner.group.name}_${partner.name}`,
               state: { partner: partner },
             }}
           >
